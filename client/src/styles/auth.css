@@ -1,0 +1,196 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:linear-gradient(
+  135deg,
+  #f8fafc 0%,
+  #eef2ff 100%
+);;
+  font-family:Inter, sans-serif;
+}
+
+.auth-container{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.auth-card{
+  background:white;
+  width:100%;
+  max-width:450px;
+  padding:40px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.auth-card h1{
+  font-size: 28px;
+  line-height: 1.4;
+  text-align:center;
+  color:#0f172a;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#64748b;
+  margin-bottom:30px;
+}
+
+.auth-form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.auth-form input{
+  padding:14px;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  font-size:15px;
+}
+
+.auth-form input:focus{
+  outline:none;
+  border-color:#2563eb;
+}
+
+.auth-form button{
+  padding:14px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:600;
+}
+
+.auth-form button:hover{
+  background:#1d4ed8;
+}
+
+.auth-footer{
+  text-align:center;
+  margin-top:20px;
+  color:#64748b;
+}
+
+.auth-footer a{
+  color:#2563eb;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.logo{
+  width:60px;
+  height:60px;
+  margin:0 auto 20px;
+  border-radius:16px;
+  background:#2563eb;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:20px;
+}
+
+.success-message{
+  margin-top:16px;
+  text-align:center;
+  color:#16a34a;
+  font-weight:600;
+}
+
+.error-message{
+  margin-top:16px;
+  text-align:center;
+  color:#dc2626;
+  font-weight:600;
+}
+
+.auth-switch {
+  margin-top: 20px;
+  text-align: center;
+  color: #64748b;
+  font-size: 15px;
+}
+
+.auth-switch a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+textarea {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 16px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.back-btn {
+  display: inline-block;
+
+  background: #2563eb;
+  color: white;
+
+  padding: 12px 18px;
+
+  border-radius: 12px;
+
+  text-decoration: none;
+  font-weight: 600;
+
+  margin-bottom: 20px;
+
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.dashboard-link-btn {
+  display: block;
+
+  width: fit-content;
+
+  margin: 20px auto 0;
+
+  padding: 12px 22px;
+
+  background: #0f172a;
+  color: white;
+
+  text-decoration: none;
+
+  border-radius: 12px;
+
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+.dashboard-link-btn:hover {
+  background: #1e293b;
+  transform: translateY(-2px);
+}
