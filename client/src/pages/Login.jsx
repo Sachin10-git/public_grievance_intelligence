@@ -32,6 +32,9 @@ function Login() {
       setError("");
       setMessage("Login Successful!");
 
+      // Remove admin session
+      localStorage.removeItem("admin");
+
       // Save JWT Token
       localStorage.setItem("token", data.token);
 

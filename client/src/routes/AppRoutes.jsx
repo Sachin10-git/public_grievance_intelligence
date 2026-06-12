@@ -5,6 +5,11 @@ import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
 import SubmitComplaint from "../pages/SubmitComplaint";
 import MyComplaints from "../pages/MyComplaints";
+import AdminDashboard from "../pages/AdminDashboard";
+import AdminLogin from "../pages/AdminLogin";
+
+import PrivateRoute from "../components/PrivateRoute";
+import AdminRoute from "../components/AdminRoute";
 
 function AppRoutes() {
   return (
@@ -22,18 +27,43 @@ function AppRoutes() {
 
         <Route
           path="/dashboard"
-          element={<Dashboard />}
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
         />
 
         <Route
           path="/submit"
-          element={<SubmitComplaint />}
+          element={
+            <PrivateRoute>
+              <SubmitComplaint />
+            </PrivateRoute>
+          }
         />
 
         <Route
           path="/my-complaints"
-          element={<MyComplaints />}
+          element={
+            <PrivateRoute>
+              <MyComplaints />
+            </PrivateRoute>
+          }
         />
+
+        <Route
+          path="/admin"
+          element={<AdminRoute>
+      <AdminDashboard />
+    </AdminRoute>}
+        />
+
+        <Route
+          path="/admin-login"
+          element={<AdminLogin />}
+        />
+
       </Routes>
     </BrowserRouter>
   );

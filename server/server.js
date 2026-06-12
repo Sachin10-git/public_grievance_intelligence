@@ -6,6 +6,7 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const { protect } = require("./middleware/authMiddleware");
 const complaintRoutes = require("./routes/complaintRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/complaints", complaintRoutes);
+app.use("/api/admin", adminRoutes);
 app.get("/", (req, res) => {
   res.send("Public Grievance API Running...");
 });
