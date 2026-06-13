@@ -121,3 +121,77 @@
   color: #64748b;
   font-size: 14px;
 }
+
+/* =========================
+   AI GENERATED DETAILS
+========================= */
+
+.ai-section {
+  margin-top: 18px;
+  padding: 16px;
+
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+}
+
+.ai-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 10px;
+
+  color: #334155;
+}
+
+.ai-row strong {
+  color: #0f172a;
+}
+
+.ai-summary {
+  margin-top: 12px;
+}
+
+.ai-summary strong {
+  display: block;
+  margin-bottom: 8px;
+
+  color: #0f172a;
+}
+
+.ai-summary p {
+  margin: 0;
+
+  line-height: 1.6;
+  color: #475569;
+}
+
+/* =========================
+   PRIORITY BADGES
+========================= */
+
+.priority-badge {
+  padding: 5px 12px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.priority-badge.high {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.priority-badge.medium {
+  background: #fed7aa;
+  color: #c2410c;
+}
+
+.priority-badge.low {
+  background: #dcfce7;
+  color: #15803d;
+}

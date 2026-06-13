@@ -21,6 +21,15 @@ function AdminDashboard() {
   const [filterStatus, setFilterStatus] =
     useState("All");
 
+  const [filterPriority, setFilterPriority] =
+    useState("All");
+
+  const [filterCategory, setFilterCategory] =
+  useState("All");
+  
+  const [filterDepartment, setFilterDepartment] =
+  useState("All");
+
   useEffect(() => {
     fetchComplaints();
   }, []);
@@ -76,6 +85,36 @@ function AdminDashboard() {
     complaints.filter(
       (c) => c.status === "Resolved"
     ).length;
+    const highPriority =
+  complaints.filter(
+    (c) => c.priority === "High"
+  ).length;
+
+const mediumPriority =
+  complaints.filter(
+    (c) => c.priority === "Medium"
+  ).length;
+
+const lowPriority =
+  complaints.filter(
+    (c) => c.priority === "Low"
+  ).length;
+
+  const categories = [
+  ...new Set(
+    complaints
+      .map((c) => c.category)
+      .filter(Boolean)
+  ),
+];
+
+const departments = [
+  ...new Set(
+    complaints
+      .map((c) => c.department)
+      .filter(Boolean)
+  ),
+];
 
   const filteredComplaints =
     complaints.filter(
@@ -88,14 +127,32 @@ function AdminDashboard() {
             );
 
         const matchesStatus =
-          filterStatus === "All"
-            ? true
-            : complaint.status ===
-              filterStatus;
+  filterStatus === "All"
+    ? true
+    : complaint.status ===
+      filterStatus;
 
+        const matchesPriority =
+          filterPriority === "All"
+            ? true
+            : complaint.priority ===
+              filterPriority;
+            const matchesCategory =
+              filterCategory === "All"
+                ? true
+                : complaint.category ===
+                  filterCategory;
+            const matchesDepartment =
+              filterDepartment === "All"
+                ? true
+                : complaint.department ===
+                  filterDepartment;
         return (
           matchesSearch &&
-          matchesStatus
+          matchesStatus &&
+          matchesPriority &&
+          matchesCategory &&
+          matchesDepartment
         );
       }
     );
@@ -150,6 +207,20 @@ function AdminDashboard() {
           <h2>{resolved}</h2>
           <p>Resolved</p>
         </div>
+        <div className="admin-stat-card high-priority">
+          <h2>{highPriority}</h2>
+          <p>High Priority</p>
+        </div>
+
+        <div className="admin-stat-card medium-priority">
+          <h2>{mediumPriority}</h2>
+          <p>Medium Priority</p>
+        </div>
+
+        <div className="admin-stat-card low-priority">
+          <h2>{lowPriority}</h2>
+          <p>Low Priority</p>
+        </div>
       </div>
 
       <div className="admin-controls">
@@ -172,12 +243,58 @@ function AdminDashboard() {
             )
           }
         >
-          <option>All</option>
+          <option>All Status</option>
           <option>Pending</option>
           <option>
             In Progress
           </option>
           <option>Resolved</option>
+        </select>
+
+        <select
+          value={filterPriority}
+          onChange={(e) =>
+            setFilterPriority(
+              e.target.value
+            )
+          }
+        >
+          <option>All Priorities</option>
+          <option>High</option>
+          <option>Medium</option>
+          <option>Low</option>
+        </select>
+
+        <select
+          value={filterCategory}
+          onChange={(e) =>
+            setFilterCategory(
+              e.target.value
+            )
+          }
+        >
+          <option value="All">All Categories</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={filterDepartment}
+          onChange={(e) =>
+            setFilterDepartment(
+              e.target.value
+            )
+          }
+        >
+          <option value="All">All Departments</option>
+          {departments.map((department) => (
+            <option key={department} value={department}>
+              {department}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -185,9 +302,13 @@ function AdminDashboard() {
         {filteredComplaints.map(
           (complaint) => (
             <div
-              className="admin-card"
-              key={complaint._id}
-            >
+                className={`admin-card ${
+                  complaint.priority === "High"
+                    ? "high-priority-card"
+                    : ""
+                }`}
+                key={complaint._id}
+              >
               <div className="card-top">
                 <div>
                   <h3>
@@ -228,6 +349,37 @@ function AdminDashboard() {
                   complaint.description
                 }
               </p>
+
+              <div className="ai-details">
+
+                <p>
+                  <strong>🏷 Category:</strong>{" "}
+                  {complaint.category}
+                </p>
+
+                <p>
+                  <strong>🏢 Department:</strong>{" "}
+                  {complaint.department}
+                </p>
+
+                <p>
+                  <strong>⚡ Priority:</strong>{" "}
+
+                  <span
+                    className={`priority-badge ${complaint.priority?.toLowerCase()}`}
+                  >
+                    {complaint.priority}
+                  </span>
+                </p>
+
+                {complaint.aiSummary && (
+                  <div className="ai-summary">
+                    <strong>🤖 AI Summary:</strong>
+                    <p>{complaint.aiSummary}</p>
+                  </div>
+                )}
+
+              </div>
 
               <div className="status-update">
                 <label>

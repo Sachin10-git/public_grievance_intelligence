@@ -1,5 +1,5 @@
 const Complaint = require("../models/Complaint");
-
+const { analyzeComplaint } = require("../services/grievanceAnalyzer");
 const createComplaint = async (req, res) => {
   try {
     const { title, description, location } = req.body;
@@ -10,12 +10,33 @@ const createComplaint = async (req, res) => {
       });
     }
 
-    const complaint = await Complaint.create({
-      title,
-      description,
-      location,
-      createdBy: req.user._id,
-    });
+    const aiAnalysis =
+  await analyzeComplaint(
+    title,
+    description
+  );
+
+const complaint =
+  await Complaint.create({
+    title,
+    description,
+    location,
+
+    category:
+      aiAnalysis.category,
+
+    priority:
+      aiAnalysis.priority,
+
+    department:
+      aiAnalysis.department,
+
+    aiSummary:
+      aiAnalysis.summary,
+
+    createdBy:
+      req.user._id,
+  });
 
     res.status(201).json({
       message: "Complaint submitted successfully",

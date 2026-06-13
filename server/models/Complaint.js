@@ -33,6 +33,25 @@ const complaintSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    category: {
+      type: String,
+      default: "Uncategorized",
+    },
+
+    priority: {
+      type: String,
+      enum: ["Low", "Medium", "High"],
+      default: "Low",
+    },
+    department: {
+      type: String,
+      default: "Unassigned",
+    },
+
+    aiSummary: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

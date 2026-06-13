@@ -64,49 +64,81 @@ function MyComplaints() {
       ) : (
 
         complaints.map((complaint) => (
-          <div
-            className="complaint-card"
-            key={complaint._id}
-          >
+  <div
+    className="complaint-card"
+    key={complaint._id}
+  >
+    <div className="card-header">
+      <h3>{complaint.title}</h3>
 
-            <div className="card-header">
+      <span
+        className={`status ${complaint.status
+          .toLowerCase()
+          .replace(/\s+/g, "-")}`}
+      >
+        {complaint.status}
+      </span>
+    </div>
 
-              <h3>{complaint.title}</h3>
+    <p className="description">
+      {complaint.description}
+    </p>
 
-              <span
-                className={`status ${complaint.status
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
-              >
-                {complaint.status}
-              </span>
+    {/* AI GENERATED DETAILS */}
 
-            </div>
+    <div className="ai-section">
 
-            <p className="description">
-              {complaint.description}
-            </p>
+      <div className="ai-row">
+        <strong>🏷 Category:</strong>
+        <span>{complaint.category}</span>
+      </div>
 
-            <div className="card-footer">
+      <div className="ai-row">
+        <strong>🏢 Department:</strong>
+        <span>{complaint.department}</span>
+      </div>
 
-              <p>
-                <strong>📍 Location:</strong>{" "}
-                {complaint.location}
-              </p>
+      <div className="ai-row">
+        <strong>⚡ Priority:</strong>
 
-              <p className="complaint-date">
-                <strong>📅 Submitted:</strong>{" "}
-                {complaint.createdAt
-                  ? new Date(
-                      complaint.createdAt
-                    ).toLocaleDateString("en-GB")
-                  : "N/A"}
-              </p>
+        <span
+          className={`priority-badge ${
+            complaint.priority?.toLowerCase()
+          }`}
+        >
+          {complaint.priority}
+        </span>
+      </div>
 
-            </div>
+      {complaint.aiSummary && (
+        <div className="ai-summary">
+          <strong>🤖 AI Summary:</strong>
 
-          </div>
-        ))
+          <p>{complaint.aiSummary}</p>
+        </div>
+      )}
+
+    </div>
+
+    <div className="card-footer">
+
+      <p>
+        <strong>📍 Location:</strong>{" "}
+        {complaint.location}
+      </p>
+
+      <p className="complaint-date">
+        <strong>📅 Submitted:</strong>{" "}
+        {complaint.createdAt
+          ? new Date(
+              complaint.createdAt
+            ).toLocaleDateString("en-GB")
+          : "N/A"}
+      </p>
+
+    </div>
+  </div>
+))
 
       )}
     </div>
