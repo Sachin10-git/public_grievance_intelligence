@@ -7,7 +7,7 @@ import SubmitComplaint from "../pages/SubmitComplaint";
 import MyComplaints from "../pages/MyComplaints";
 import AdminDashboard from "../pages/AdminDashboard";
 import AdminLogin from "../pages/AdminLogin";
-
+import LandingPage from "../pages/LandingPage";
 import PrivateRoute from "../components/PrivateRoute";
 import AdminRoute from "../components/AdminRoute";
 
@@ -17,6 +17,11 @@ function AppRoutes() {
       <Routes>
         <Route
           path="/"
+          element={<LandingPage />}
+        />
+
+        <Route
+          path="/login"
           element={<Login />}
         />
 
