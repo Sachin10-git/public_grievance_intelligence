@@ -22,6 +22,11 @@ const complaintSchema = new mongoose.Schema(
       default: "",
     },
 
+    ticketId: {
+      type: String,
+      unique: true,
+    },
+
     status: {
       type: String,
       enum: ["Pending", "In Progress", "Resolved"],
@@ -52,6 +57,7 @@ const complaintSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+
   },
   {
     timestamps: true,

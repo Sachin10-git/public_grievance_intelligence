@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const { sendStatusUpdateEmail,} = require("../services/emailService");
 const Complaint = require("../models/Complaint");
 
 router.get(
@@ -29,6 +29,9 @@ router.put(
       const complaint =
         await Complaint.findById(
           req.params.id
+        ).populate(
+          "createdBy",
+          "name email"
         );
 
       if (!complaint) {
@@ -41,6 +44,16 @@ router.put(
         req.body.status;
 
       await complaint.save();
+      
+      console.log(
+        "Sending status email to:",
+        complaint.createdBy.email
+      );
+
+      await sendStatusUpdateEmail(
+        complaint.createdBy.email,
+        complaint
+      );
 
       res.json(complaint);
 

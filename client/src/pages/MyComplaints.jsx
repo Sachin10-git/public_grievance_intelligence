@@ -70,7 +70,9 @@ function MyComplaints() {
   >
     <div className="card-header">
       <h3>{complaint.title}</h3>
-
+          <p className="ticket-id">
+            🎫 {complaint.ticketId}
+          </p>
       <span
         className={`status ${complaint.status
           .toLowerCase()
@@ -83,6 +85,15 @@ function MyComplaints() {
     <p className="description">
       {complaint.description}
     </p>
+
+    {complaint.image && (
+      <div className="complaint-image">
+        <img
+          src={`http://localhost:5000${complaint.image}`}
+          alt="Complaint"
+        />
+      </div>
+    )}
 
     {/* AI GENERATED DETAILS */}
 

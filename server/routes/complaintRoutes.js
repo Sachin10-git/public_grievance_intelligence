@@ -11,7 +11,9 @@ const {
   updateComplaintStatus,
 } = require("../controllers/complaintController");
 
-router.post("/", protect, createComplaint);
+const upload = require("../middleware/uploadMiddleware");
+
+router.post("/", protect, upload.single("image"), createComplaint);
 
 router.get("/my", protect, getMyComplaints);
 

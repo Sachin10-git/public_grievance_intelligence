@@ -1,5 +1,5 @@
 const { GoogleGenAI } = require("@google/genai");
-
+const JSON5 = require("json5");
 async function analyzeComplaint(title, description) {
   try {
     const ai = new GoogleGenAI({
@@ -61,7 +61,7 @@ Return format:
   "category": "",
   "priority": "Low | Medium | High",
   "department": "",
-  "summary": ""
+  "summary": "",
 }
 
 Return ONLY the JSON object.
@@ -73,7 +73,7 @@ Example:
   "category": "Road Infrastructure",
   "priority": "High",
   "department": "Public Works Department",
-  "summary": "Large pothole causing accidents near a major junction."
+  "summary": "Large pothole causing accidents near a major junction.",
 }
 `;
 
@@ -86,11 +86,12 @@ Example:
 
     // Remove markdown if Gemini returns it
     const cleaned = text
-      .replace(/```json/gi, "")
-      .replace(/```/g, "")
-      .trim();
+  .replace(/```json/gi, "")
+  .replace(/```/g, "")
+  .trim();
 
-    const parsed = JSON.parse(cleaned);
+const parsed = JSON5.parse(cleaned);
+
 const validPriorities = [
   "Low",
   "Medium",
@@ -113,6 +114,7 @@ return {
 
   summary:
     parsed.summary || "",
+
 };
   } catch (error) {
     console.error("\nAI ANALYSIS ERROR:");

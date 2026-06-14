@@ -195,3 +195,36 @@
   background: #dcfce7;
   color: #15803d;
 }
+
+.complaint-image {
+  margin: 15px 0;
+}
+
+.complaint-image img {
+  width: 100%;
+  max-height: 350px;
+
+  object-fit: cover;
+
+  border-radius: 14px;
+
+  border: 1px solid #e2e8f0;
+}
+
+.ticket-id {
+  display: inline-block;
+
+  margin-top: 10px;
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  background: #dbeafe;
+
+  color: #1d4ed8;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}

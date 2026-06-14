@@ -5,13 +5,20 @@ import "../styles/auth.css";
 
 function SubmitComplaint() {
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    location: "",
+  title: "",
+  description: "",
+  location: "",
   });
+
+  const [image, setImage] = useState(null);
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleImageChange = (e) => {
+  setImage(e.target.files[0]);
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -21,38 +28,68 @@ function SubmitComplaint() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  setSubmitting(true);
 
-    try {
-      const data = await createComplaint(
-        formData
-      );
+  try {
+    const complaintData =
+      new FormData();
 
-      console.log(data);
+    complaintData.append(
+      "title",
+      formData.title
+    );
 
-      setError("");
-      setMessage(
-        "Complaint submitted successfully!"
-      );
+    complaintData.append(
+      "description",
+      formData.description
+    );
 
-      setFormData({
-        title: "",
-        description: "",
-        location: "",
-      });
+    complaintData.append(
+      "location",
+      formData.location
+    );
 
-    } catch (error) {
-      console.error(error);
-
-      setMessage("");
-
-      setError(
-        error.response?.data?.message ||
-        "Failed to submit complaint"
+    if (image) {
+      complaintData.append(
+        "image",
+        image
       );
     }
-  };
 
+    const data =
+      await createComplaint(
+        complaintData
+      );
+
+    console.log(data);
+
+    setError("");
+    setMessage(
+      "Complaint submitted successfully!"
+    );
+
+    setFormData({
+      title: "",
+      description: "",
+      location: "",
+    });
+
+    setImage(null);
+
+  } catch (error) {
+    console.error(error);
+
+    setMessage("");
+
+    setError(
+      error.response?.data?.message ||
+      "Failed to submit complaint"
+    );
+  } finally {
+    setSubmitting(false);
+  }
+};
   return (
     <div className="auth-container">
       <div className="auth-card">
@@ -98,9 +135,33 @@ function SubmitComplaint() {
             required
           />
 
-          <button type="submit">
-            Submit Complaint
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+
+          <button
+            type="submit"
+            disabled={submitting}
+          >
+            {submitting
+              ? "Submitting Complaint..."
+              : "Submit Complaint"}
           </button>
+
+            {submitting && (
+              <p
+                style={{
+                  marginTop: "12px",
+                  color: "#2563eb",
+                  fontWeight: "600",
+                }}
+              >
+                ⏳ Submitting complaint and
+                generating ticket...
+              </p>
+            )}
 
           {message && (
             <p className="success-message">

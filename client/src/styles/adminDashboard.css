@@ -580,3 +580,40 @@
   }
 
 }
+
+.complaint-image {
+  margin: 18px 0;
+}
+
+.complaint-image img {
+  width: 100%;
+  max-height: 300px;
+
+  object-fit: cover;
+
+  border-radius: 14px;
+
+  border: 1px solid #e2e8f0;
+}
+
+.trend-chart {
+  grid-column: span 3;
+}
+
+.ticket-id {
+  display: inline-block;
+
+  margin-top: 10px;
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  background: #dbeafe;
+
+  color: #1d4ed8;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}

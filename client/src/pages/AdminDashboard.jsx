@@ -13,6 +13,7 @@ import CategoryChart
 from "../components/charts/CategoryChart";
 import AIInsights
 from "../components/charts/AIInsights";
+import TrendChart from "../components/TrendChart";
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -244,6 +245,10 @@ const departments = [
           complaints={complaints}
         />
 
+        <TrendChart
+          complaints={complaints}
+        />
+
       </div>
 
       <AIInsights complaints={complaints} />
@@ -340,6 +345,10 @@ const departments = [
                     {complaint.title}
                   </h3>
 
+                    <p className="ticket-id">
+                      🎫 {complaint.ticketId}
+                    </p>
+
                   <p className="location">
                     📍{" "}
                     {
@@ -374,6 +383,15 @@ const departments = [
                   complaint.description
                 }
               </p>
+
+                {complaint.image && (
+                  <div className="complaint-image">
+                    <img
+                      src={`http://localhost:5000${complaint.image}`}
+                      alt="Complaint"
+                    />
+                  </div>
+                )}
 
               <div className="ai-details">
 

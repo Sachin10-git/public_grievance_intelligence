@@ -1,48 +1,72 @@
 const Complaint = require("../models/Complaint");
 const { analyzeComplaint } = require("../services/grievanceAnalyzer");
+const { sendComplaintEmail,} = require("../services/emailService");
+const { sendStatusUpdateEmail,} = require("../services/emailService");
 const createComplaint = async (req, res) => {
   try {
-    const { title, description, location } = req.body;
+    const { title, description, location } =
+      req.body;
 
-    if (!title || !description || !location) {
+    if (
+      !title ||
+      !description ||
+      !location
+    ) {
       return res.status(400).json({
-        message: "All fields are required",
+        message:
+          "All fields are required",
       });
     }
 
     const aiAnalysis =
-  await analyzeComplaint(
-    title,
-    description
-  );
+      await analyzeComplaint(
+        title,
+        description
+      );
 
-const complaint =
-  await Complaint.create({
-    title,
-    description,
-    location,
+    const imagePath = req.file
+      ? `/uploads/${req.file.filename}`
+      : "";
 
-    category:
-      aiAnalysis.category,
+      const ticketId =
+      `PGIP-${Date.now()}-${Math.floor(
+        1000 + Math.random() * 9000
+      )}`;
 
-    priority:
-      aiAnalysis.priority,
+    const complaint =
+      await Complaint.create({
+        title,
+        description,
+        location,
+        ticketId,
+        image: imagePath,
 
-    department:
-      aiAnalysis.department,
+        category:
+          aiAnalysis.category,
 
-    aiSummary:
-      aiAnalysis.summary,
+        priority:
+          aiAnalysis.priority,
 
-    createdBy:
-      req.user._id,
-  });
+        department:
+          aiAnalysis.department,
+
+        aiSummary:
+          aiAnalysis.summary,
+
+        createdBy:
+          req.user._id,
+      });
+
+    await sendComplaintEmail(req.user.email, complaint);
 
     res.status(201).json({
-      message: "Complaint submitted successfully",
+      message:
+        "Complaint submitted successfully",
       complaint,
     });
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       message: error.message,
     });
@@ -78,12 +102,17 @@ const getAllComplaints = async (req, res) => {
 };
 
 const updateComplaintStatus = async (req, res) => {
+  console.log("UPDATE STATUS API HIT");
   try {
     const { status } = req.body;
 
-    const complaint = await Complaint.findById(
-      req.params.id
-    );
+    const complaint =
+  await Complaint.findById(
+    req.params.id
+  ).populate(
+    "createdBy",
+    "name email"
+  );
 
     if (!complaint) {
       return res.status(404).json({
@@ -94,6 +123,10 @@ const updateComplaintStatus = async (req, res) => {
     complaint.status = status;
 
     await complaint.save();
+
+    await sendStatusUpdateEmail(
+    complaint.createdBy.email,
+    complaint);
 
     res.status(200).json({
       message: "Complaint status updated",
