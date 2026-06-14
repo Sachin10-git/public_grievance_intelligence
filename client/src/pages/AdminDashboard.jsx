@@ -5,6 +5,14 @@ import {
   updateComplaintStatus,
 } from "../services/adminService";
 import "../styles/adminDashboard.css";
+import StatusChart
+from "../components/charts/StatusChart";
+import PriorityChart
+from "../components/charts/PriorityChart";
+import CategoryChart
+from "../components/charts/CategoryChart";
+import AIInsights
+from "../components/charts/AIInsights";
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -222,6 +230,23 @@ const departments = [
           <p>Low Priority</p>
         </div>
       </div>
+
+      <div className="charts-section">
+        <StatusChart
+          complaints={complaints}
+        />
+
+        <PriorityChart
+          complaints={complaints}
+        />
+
+        <CategoryChart
+          complaints={complaints}
+        />
+
+      </div>
+
+      <AIInsights complaints={complaints} />
 
       <div className="admin-controls">
         <input
