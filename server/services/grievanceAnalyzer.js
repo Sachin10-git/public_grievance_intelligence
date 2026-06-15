@@ -1,11 +1,42 @@
 const { GoogleGenAI } = require("@google/genai");
 const JSON5 = require("json5");
+const { retrieveIssue,} = require("./retrieveIssue");
 async function analyzeComplaint(title, description) {
   try {
     const ai = new GoogleGenAI({
       apiKey: process.env.GEMINI_API_KEY,
     });
 
+    const kbResult =
+  retrieveIssue(
+    title,
+    description
+  );
+
+if (kbResult) {
+
+  return {
+  category:
+    kbResult.category,
+
+  priority:
+    kbResult.priority,
+
+  department:
+    kbResult.department,
+
+  summary:
+    description.length > 120
+      ? description.substring(
+          0,
+          120
+        ) + "..."
+      : description,
+
+  recommendedAction:
+    kbResult.recommendedAction,
+};
+}
     const prompt = `
 You are an AI assistant for a Public Grievance Platform.
 

@@ -57,7 +57,19 @@ const complaintSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    recommendedAction: {
+      type: String,
+      default: "",
+    },
+    escalated: {
+      type: Boolean,
+      default: false,
+    },
 
+    escalationReason: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

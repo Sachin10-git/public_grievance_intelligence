@@ -9,6 +9,7 @@ const path = require("path");
 const { protect } = require("./middleware/authMiddleware");
 const complaintRoutes = require("./routes/complaintRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const { checkEscalations,} = require("./services/escalationService");
 
 connectDB();
 
@@ -42,3 +43,8 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+setInterval(
+  checkEscalations,
+  60 * 1000
+);

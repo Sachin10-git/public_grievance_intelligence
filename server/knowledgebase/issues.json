@@ -1,0 +1,116 @@
+[
+  {
+  "keywords": [
+    "pothole",
+    "road damage",
+    "road crack"
+  ],
+
+  "category": "Road Infrastructure",
+
+  "priority": "High",
+
+  "department": "Public Works Department",
+
+  "recommendedAction":
+    "Dispatch road maintenance team immediately and inspect affected area for safety risks."
+},
+
+  {
+  "keywords": [
+    "pipeline burst",
+    "water leakage",
+    "water pipe"
+  ],
+
+  "category": "Water Infrastructure",
+
+  "priority": "High",
+
+  "department": "Water Department",
+
+  "recommendedAction":
+    "Assign emergency pipeline repair team and restore normal water supply."
+},
+
+  {
+    "keywords": ["drainage", "sewage", "water clog", "blocked drain"],
+    "category": "Drainage",
+    "priority": "High",
+    "department": "Municipal Corporation"
+  },
+
+  {
+    "keywords": ["garbage", "waste", "trash accumulation"],
+    "category": "Sanitation",
+    "priority": "Medium",
+    "department": "Municipal Corporation"
+  },
+
+  {
+    "keywords": ["streetlight", "street light", "light not working"],
+    "category": "Public Lighting",
+    "priority": "Medium",
+    "department": "Electrical Department"
+  },
+
+  {
+  "keywords": [
+    "live wire",
+    "electrical wire",
+    "electric shock",
+    "power cable"
+  ],
+
+  "category": "Electrical Infrastructure",
+
+  "priority": "High",
+
+  "department": "Electrical Department",
+
+  "recommendedAction":
+    "Dispatch emergency electrical maintenance crew immediately and secure the affected area."
+},
+
+  {
+    "keywords": ["traffic signal", "signal not working"],
+    "category": "Traffic Management",
+    "priority": "Medium",
+    "department": "Traffic Department"
+  },
+  {
+  "keywords": ["garbage overflow", "garbage pile", "waste overflow"],
+  "category": "Sanitation",
+  "priority": "High",
+  "department": "Municipal Corporation",
+  "recommendedAction": "Deploy sanitation team immediately and clear accumulated waste."
+},
+{
+  "keywords": ["water contamination", "dirty water", "unsafe water"],
+  "category": "Water Quality",
+  "priority": "High",
+  "department": "Water Department",
+  "recommendedAction": "Collect water samples and investigate contamination source."
+},
+{
+  "keywords": ["fallen tree", "tree blocking road"],
+  "category": "Public Safety",
+  "priority": "High",
+  "department": "Parks and Forestry Department",
+  "recommendedAction": "Remove obstruction and inspect surrounding trees for safety."
+},
+{
+  "keywords": ["noise pollution", "loud noise"],
+  "category": "Environmental Issues",
+  "priority": "Medium",
+  "department": "Pollution Control Board",
+  "recommendedAction": "Inspect source of noise and enforce regulations."
+},
+{
+  "keywords": ["footpath encroachment", "sidewalk blocked"],
+  "category": "Urban Infrastructure",
+  "priority": "Medium",
+  "department": "Municipal Corporation",
+  "recommendedAction": "Inspect and remove encroachment."
+}
+]

@@ -23,7 +23,6 @@ const createComplaint = async (req, res) => {
         title,
         description
       );
-
     const imagePath = req.file
       ? `/uploads/${req.file.filename}`
       : "";
@@ -52,6 +51,9 @@ const createComplaint = async (req, res) => {
 
         aiSummary:
           aiAnalysis.summary,
+
+        recommendedAction:
+          aiAnalysis.recommendedAction,
 
         createdBy:
           req.user._id,
@@ -102,7 +104,6 @@ const getAllComplaints = async (req, res) => {
 };
 
 const updateComplaintStatus = async (req, res) => {
-  console.log("UPDATE STATUS API HIT");
   try {
     const { status } = req.body;
 

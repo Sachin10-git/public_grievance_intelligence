@@ -90,6 +90,11 @@ function AdminDashboard() {
         c.status === "In Progress"
     ).length;
 
+    const escalated =
+    complaints.filter(
+      (c) => c.escalated
+    ).length;
+
   const resolved =
     complaints.filter(
       (c) => c.status === "Resolved"
@@ -215,6 +220,10 @@ const departments = [
         <div className="admin-stat-card resolved">
           <h2>{resolved}</h2>
           <p>Resolved</p>
+        </div>
+        <div className="admin-stat-card escalated">
+          <h2>{escalated}</h2>
+          <p>Escalated</p>
         </div>
         <div className="admin-stat-card high-priority">
           <h2>{highPriority}</h2>
@@ -348,6 +357,18 @@ const departments = [
                     <p className="ticket-id">
                       🎫 {complaint.ticketId}
                     </p>
+                    
+                    {complaint.escalated && (
+                      <>
+                        <span className="escalated-badge">
+                          🚨 Escalated
+                        </span>
+
+                        <p className="escalation-reason">
+                          {complaint.escalationReason}
+                        </p>
+                      </>
+                    )}
 
                   <p className="location">
                     📍{" "}
@@ -419,6 +440,18 @@ const departments = [
                   <div className="ai-summary">
                     <strong>🤖 AI Summary:</strong>
                     <p>{complaint.aiSummary}</p>
+                  </div>
+                )}
+
+                {complaint.recommendedAction && (
+                  <div className="ai-summary">
+                    <strong>
+                      🤖 Recommended Action:
+                    </strong>
+
+                    <p>
+                      {complaint.recommendedAction}
+                    </p>
                   </div>
                 )}
 
