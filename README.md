@@ -388,8 +388,6 @@ This project demonstrates practical implementation of:
 Information Science and Engineering
 BMS Institute of Technology and Management
 
-GitHub: https://github.com/<your-github-username>
-
 ---
 
 ## License
