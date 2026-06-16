@@ -90,7 +90,7 @@ app.use(
   )
 );
 
-// API Routes
+//  Routes
 
 app.use(
   "/api/auth",
