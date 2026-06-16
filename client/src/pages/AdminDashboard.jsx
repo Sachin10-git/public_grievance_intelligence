@@ -14,6 +14,7 @@ from "../components/charts/CategoryChart";
 import AIInsights
 from "../components/charts/AIInsights";
 import TrendChart from "../components/TrendChart";
+import AIAssistant from "../components/AIAssistant";
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -261,6 +262,7 @@ const departments = [
       </div>
 
       <AIInsights complaints={complaints} />
+      <AIAssistant />
 
       <div className="admin-controls">
         <input

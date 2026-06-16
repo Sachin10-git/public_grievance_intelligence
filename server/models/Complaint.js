@@ -61,6 +61,10 @@ const complaintSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    embedding: {
+      type: [Number],
+      default: [],
+    },
     escalated: {
       type: Boolean,
       default: false,

@@ -2,6 +2,7 @@ const Complaint = require("../models/Complaint");
 const { analyzeComplaint } = require("../services/grievanceAnalyzer");
 const { sendComplaintEmail,} = require("../services/emailService");
 const { sendStatusUpdateEmail,} = require("../services/emailService");
+const { generateEmbedding,} = require("../services/embeddingService");
 const createComplaint = async (req, res) => {
   try {
     const { title, description, location } =
@@ -23,6 +24,13 @@ const createComplaint = async (req, res) => {
         title,
         description
       );
+      console.log(
+  "AI ANALYSIS:"
+);
+
+console.log(
+  aiAnalysis
+);
     const imagePath = req.file
       ? `/uploads/${req.file.filename}`
       : "";
@@ -32,6 +40,14 @@ const createComplaint = async (req, res) => {
         1000 + Math.random() * 9000
       )}`;
 
+    const embedding =
+      await generateEmbedding(
+        `${title} ${description}`
+      );
+      console.log(
+  "Embedding length:",
+  embedding.length
+);
     const complaint =
       await Complaint.create({
         title,
@@ -39,6 +55,7 @@ const createComplaint = async (req, res) => {
         location,
         ticketId,
         image: imagePath,
+        embedding,
 
         category:
           aiAnalysis.category,
@@ -58,7 +75,10 @@ const createComplaint = async (req, res) => {
         createdBy:
           req.user._id,
       });
-
+console.log(
+  "Complaint Created:",
+  complaint._id
+);
     await sendComplaintEmail(req.user.email, complaint);
 
     res.status(201).json({
